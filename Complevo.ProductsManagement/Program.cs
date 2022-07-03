@@ -12,6 +12,7 @@ builder.Services.Configure<ServiceSettings>(builder.Configuration.GetSection("Se
 builder.Services
     .AddMongo()
     .AddMongoRepository<Product>("Products");
+builder.Services.AddSingleton<ISerializerService, SerializerService>();
 builder.Services.AddSingleton<IProductServices, ProductServices>();
 builder.Services.AddControllers(options =>
 {
@@ -40,3 +41,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }

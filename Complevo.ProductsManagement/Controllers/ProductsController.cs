@@ -73,7 +73,7 @@ namespace Complevo.ProductsManagement.Controllers
 
         // PUT /products/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(Guid id, UpdateProductDto updateProductDto)
+        public async Task<IActionResult> PutByIdAsync(Guid id, UpdateProductDto updateProductDto)
         {
             var existingProduct = await _productServices.GetProductAsync(id);
 
