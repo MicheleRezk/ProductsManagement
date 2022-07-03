@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes: 
+      - mongo-data:/data/db
+  products-service:
+    build: .
+    environment:
+      MongoHost: "mongo"
+      MongoPort: "27017"
+    ports: 
+      - "8050:80"
+    links:
+      - mongo
+volumes:
+  mongo-data:
