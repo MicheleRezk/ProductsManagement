@@ -63,7 +63,7 @@ namespace Complevo.ProductsManagement.Controllers
                 Id = Guid.NewGuid(),
                 Name = createProductDto.Name,
                 Description = createProductDto.Description,
-                CreatedAt = DateTimeOffset.Now,
+                CreatedAt = DateTimeOffset.UtcNow,
             };
 
             await _productServices.CreateProductAsync(newProduct);
@@ -84,6 +84,7 @@ namespace Complevo.ProductsManagement.Controllers
 
             existingProduct.Name = updateProductDto.Name;
             existingProduct.Description = updateProductDto.Description;
+            existingProduct.UpdatedAt = DateTimeOffset.UtcNow;
 
             await _productServices.UpdateProductAsync(existingProduct);
 
