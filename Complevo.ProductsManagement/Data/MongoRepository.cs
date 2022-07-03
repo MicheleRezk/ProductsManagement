@@ -1,5 +1,6 @@
 ﻿using Complevo.ProductsManagement.Common;
 using MongoDB.Driver;
+using System.Linq.Expressions;
 
 namespace Complevo.ProductsManagement.Data
 {
@@ -18,7 +19,11 @@ namespace Complevo.ProductsManagement.Data
         }
         public async Task<T> GetAsync(Guid id)
         {
-            FilterDefinition<T> filter = _filterBuilder.Eq(entity => entity.Id, id);
+            var filter = _filterBuilder.Eq(entity => entity.Id, id);
+            return await _dbCollection.Find(filter).FirstOrDefaultAsync();
+        }
+        public async Task<T> GetAsync(Expression<Func<T, bool>> filter)
+        {
             return await _dbCollection.Find(filter).FirstOrDefaultAsync();
         }
         public async Task CreateAsync(T entity)
